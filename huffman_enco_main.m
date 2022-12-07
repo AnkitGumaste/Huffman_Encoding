@@ -72,3 +72,39 @@ prob_or=prob;
 disp('-------------------------------------------------------------------------------');
 disp(code);
 disp('-------------------------------------------------------------------------------');
+
+
+% Avg Code length
+L = 0;
+for i = 1:length(code.symbol)
+        L(i) = prob_or(i)*length(codewords{i});
+end
+L=sum(L,"all")
+
+% Entropy
+H = 0;    
+for i = 1:length(prob_or)
+    H(i) = prob_or(i)*log2(prob_or(i)^(-1));
+end
+H=sum(H,"all")
+
+% Efficiency
+Effciency=(H/L)*100
+
+% Redundancy
+Redundancy=100-Effciency
+
+% Variance
+V = 0;    
+for i = 1:length(prob_or)
+    V(i) = prob_or(i)*(length(codewords{i})-L)^2;
+end
+V=sum(V,"all")
+
+
+
+
+
+
+
+
